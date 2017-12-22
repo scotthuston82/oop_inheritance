@@ -52,3 +52,46 @@ class Multilinguist
     json_response['translationText']
   end
 end
+
+class MathGenius < Multilinguist
+
+  def report_total(numbers)
+    total = 0
+    numbers.each do |number|
+      total = total + number
+    end
+    total
+  end
+end
+
+me = MathGenius.new
+puts "The total is #{me.report_total([23,45,676,34,5778,4,23,5465])}" # The total is 12048
+me.travel_to("India")
+puts "#{me.say_in_local_language('The total is')} #{me.report_total([6,3,6,68,455,4,467,57,4,534])}" # है को कुल 1604
+me.travel_to("Italy")
+puts "#{me.say_in_local_language('The total is')} #{me.report_total([324,245,6,343647,686545])}"  # È Il totale 1030767
+
+
+class QuoteCollector < Multilinguist
+
+  def initialize(quotes)
+    @quotes = quotes
+  end
+
+  def quotes
+    @quotes
+  end
+
+  def new_quote(quote)
+    @quotes << quote
+  end
+
+  def random_quote
+    @quotes.sample
+  end
+end
+
+scott = QuoteCollector.new(["dogs are awesome","cats are okay","people suck"])
+scott.new_quote("monkeys are the best")
+scott.travel_to("Italy")
+puts scott.say_in_local_language(scott.random_quote)
